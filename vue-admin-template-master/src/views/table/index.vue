@@ -1,68 +1,52 @@
 <template>
   <div class="app-container">
-    <el-table
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      @row-click="rowClick"
-      border
-      fit
-      highlight-current-row
-    >
-      <el-table-column align="center" label="职位序号" width="95">
-        <template slot-scope="scope"> 001</template>
-      </el-table-column>
-      <el-table-column label="职位名称">
-        <template slot-scope="scope"> 前端开发 </template>
-      </el-table-column>
-      <el-table-column label="工作地点" align="center">
-        <template slot-scope="scope">
-          <span>杭州-西湖区</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="薪资" align="center">
-        <template slot-scope="scope"> 2000 </template>
-      </el-table-column>
-      <el-table-column
-        class-name="status-col"
-        label="状态"
-        width="110"
-        align="center"
-      >
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{
-            scope.row.status
-          }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="created_at" label="结束时间">
-        <template slot-scope="scope">
-          <i class="el-icon-time" />
-          <span>{{ scope.row.display_time }}</span>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div class="search-div">
+      <el-input
+        v-model="listQuery.jobName"
+        placeholder="请输入职位名称"
+      ></el-input>
+      <el-button type="primary">查询</el-button>
+      <div class="operate-button">
+        <el-button type="primary">新增</el-button>
+      </div>
+    </div>
+    <MTable :tableInfo="tableInfo" :data="list" />
   </div>
 </template>
 
 <script>
 import { getList } from "@/api/table";
-
+import MTable from '@/components/Basic/MTable'
+// import animationDialog from '@/components/Basic/animationDialog'
 export default {
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: "success",
-        draft: "gray",
-        deleted: "danger",
-      };
-      return statusMap[status];
-    },
+  components: {
+    MTable,
+    // animationDialog
   },
   data() {
     return {
-      list: null,
-      listLoading: true,
+      listQuery: {
+        jobName: ''
+      },
+      list: [],
+      tableInfo: {
+        ref: 'table',
+        height: '100%',
+        listLoading: false,
+        columns: [
+          { type: 'index', name: '序号', width: 60 },
+          { desc: 'q', name: '职位名称', tooltip: true },
+          { desc: 'qw', name: '薪资水平', tooltip: true },
+          { desc: 'qwe', name: '计划招聘人数', tooltip: true },
+          { desc: 'qwer', name: '学历要求', tooltip: true },
+          { desc: 'qwert', name: '工作地点', tooltip: true },
+          {
+            desc: '', name: '操作', newBtns: [
+              { name: '编辑', clickType: 'edit' },
+              { name: '删除', clickType: 'delete' }
+            ]
+          }]
+      }
     };
   },
   created() {
@@ -70,18 +54,29 @@ export default {
   },
   methods: {
     fetchData() {
-      this.listLoading = true;
+      this.tableInfo.listLoading = true;
       getList().then((response) => {
         this.list = response.data.items;
-        this.listLoading = false;
+        this.tableInfo.listLoading = false;
       });
-    },
-    rowClick(row, column, event) {
-      console.log("点击了某一行");
-      console.log(row);
-      console.log(column);
-      console.log(event);
     },
   },
 };
 </script>
+<style lang="scss" scoped>
+.search-div {
+  .el-input {
+    width: 220px;
+  }
+  & > .el-button {
+    margin-left: 10px;
+  }
+  .operate-button {
+    display: flex;
+    justify-content: flex-end;
+    & > .el-button {
+    }
+    margin-bottom: 20px;
+  }
+}
+</style>
