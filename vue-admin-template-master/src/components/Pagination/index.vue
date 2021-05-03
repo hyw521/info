@@ -89,12 +89,16 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .pagination-container {
   background: #fff;
-  padding: 32px 16px;
-}
-.pagination-container.hidden {
-  display: none;
+  padding: 32px 16px 16px;
+  &.hidden {
+    display: none;
+  }
+  .el-pagination {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 </style>

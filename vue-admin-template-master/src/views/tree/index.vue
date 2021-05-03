@@ -41,7 +41,7 @@
           <span class="text-class"></span>
         </el-form-item>
         <el-form-item label="行业类别：">
-          <el-select v-model="form.hylb" clearable="true" filterable="true">
+          <el-select v-model="form.hylb" :clearable="true" :filterable="true">
             <el-option
               v-for="item in options"
               :key="item.value"
