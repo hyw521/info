@@ -69,7 +69,7 @@
       <el-form ref="form" :model="form" label-width="110px">
         <div class="flex-div">
           <el-form-item label="题号：">
-            <el-input v-model="form.companyName"></el-input>
+            <el-input v-model="form.companyName" :disabled="true"></el-input>
           </el-form-item>
           <el-form-item label="科目：">
             <el-input v-model="form.companyAdd"></el-input>
@@ -93,7 +93,7 @@
         </div>
         <div class="flex-div">
           <el-form-item label="出题人：">
-            <el-input v-model="form.gk"></el-input>
+            <el-input v-model="form.gk" :disabled="true"></el-input>
           </el-form-item>
           <el-form-item label="出题时间：">
             <el-date-picker
@@ -101,6 +101,7 @@
               type="date"
               format="yyyy-MM-dd"
               placeholder="请选择出题时间"
+              :disabled="true"
             >
             </el-date-picker>
           </el-form-item>
@@ -123,7 +124,7 @@
         </div>
         <div class="flex-div">
           <el-form-item label="使用频次：">
-            <el-input v-model="form.frdb"></el-input>
+            <el-input v-model="form.frdb" :disabled="true"></el-input>
           </el-form-item>
           <el-form-item label="标签信息：">
             <el-input v-model="form.zczb"></el-input>

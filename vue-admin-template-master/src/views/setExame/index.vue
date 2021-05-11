@@ -27,7 +27,7 @@
         placeholder="请选择题目类型"
       >
         <el-option
-          v-for="item in options"
+          v-for="item in tmlxOptions"
           :key="item.value"
           :label="item.label"
           :value="item.value"
@@ -220,20 +220,36 @@ export default {
         imageUrl: ''
       },
       options: [{
-        value: '选项1',
-        label: '黄金糕'
+        value: 1,
+        label: 1
       }, {
-        value: '选项2',
-        label: '双皮奶'
+        value: 2,
+        label: 2
       }, {
-        value: '选项3',
-        label: '蚵仔煎'
+        value: 3,
+        label: 3
       }, {
-        value: '选项4',
-        label: '龙须面'
+        value: 4,
+        label: 4
       }, {
-        value: '选项5',
-        label: '北京烤鸭'
+        value: 5,
+        label: 5
+      }],
+      tmlxOptions: [{
+        value: 1,
+        label: '判断题'
+      }, {
+        value: 2,
+        label: '单选题'
+      }, {
+        value: 3,
+        label: '多选题'
+      }, {
+        value: 4,
+        label: '填空题'
+      }, {
+        value: 5,
+        label: '应用题'
       }],
       list: [],
       tableInfo: {
