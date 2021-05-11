@@ -260,16 +260,16 @@ export default {
       },
       tableData: [
         {
-          name: 'hyw', age: 24
+          question: '我是题目一', answer: '你是大笨猪'
         },
         {
-          name: 'xl', age: 23
+          question: '我是题目二', answer: '你是大肥猪'
         },
         {
-          name: 'hw', age: 24
+          question: '我是题目三', answer: '你是大懒猪'
         },
         {
-          name: 'yw', age: 24
+          question: '我是题目四', answer: '你是大傻猪'
         }
       ]
     };
