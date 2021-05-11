@@ -75,9 +75,14 @@
             <el-input v-model="form.companyAdd"></el-input>
           </el-form-item>
           <el-form-item label="题目类型：">
-            <el-select v-model="form.hylb" clearable="true" filterable="true">
+            <el-select
+              v-model="form.tmlx"
+              clearable="true"
+              filterable="true"
+              placeholder=""
+            >
               <el-option
-                v-for="item in options"
+                v-for="item in tmlxOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -100,7 +105,12 @@
             </el-date-picker>
           </el-form-item>
           <el-form-item label="难度系数：">
-            <el-select v-model="form.hylb" clearable="true" filterable="true">
+            <el-select
+              v-model="form.hylb"
+              clearable="true"
+              filterable="true"
+              placeholder=""
+            >
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -131,10 +141,26 @@
             ></el-input>
           </el-form-item>
         </div>
+        <div class="flex-div">
+          <el-form-item label="A：" v-if="[2, 3].includes(form.tmlx)">
+            <el-input v-model="form.A"></el-input>
+          </el-form-item>
+          <el-form-item label="B：" v-if="[2, 3].includes(form.tmlx)">
+            <el-input v-model="form.B"></el-input>
+          </el-form-item>
+          <el-form-item label="C：" v-if="[2, 3].includes(form.tmlx)">
+            <el-input v-model="form.C"></el-input>
+          </el-form-item>
+        </div>
+        <div class="flex-div">
+          <el-form-item label="D：" v-if="[2, 3].includes(form.tmlx)">
+            <el-input v-model="form.A"></el-input>
+          </el-form-item>
+        </div>
         <div class="one-div">
           <el-form-item label="参考答案：">
             <el-input
-              v-model="form.frdb"
+              v-model="form.ckda"
               type="textarea"
               :autosize="{ minRows: 2, maxRows: 4 }"
             ></el-input>
@@ -181,28 +207,51 @@ export default {
         companyAdd: '',
         gk: "",
         gm: "",
+        tmlx: '',
         hylb: "",
         frdb: '',
+        hd: '',
+        ckda: "",
         zczb: '',
         date: '',
         xxxx: "",
-        imageUrl: ''
+        imageUrl: '',
+        A: '',
+        B: '',
+        C: '',
+        D: ''
       },
       options: [{
-        value: '选项1',
-        label: '黄金糕'
+        value: 1,
+        label: 1
       }, {
-        value: '选项2',
-        label: '双皮奶'
+        value: 2,
+        label: 2
       }, {
-        value: '选项3',
-        label: '蚵仔煎'
+        value: 3,
+        label: 3
       }, {
-        value: '选项4',
-        label: '龙须面'
+        value: 4,
+        label: 4
       }, {
-        value: '选项5',
-        label: '北京烤鸭'
+        value: 5,
+        label: 5
+      }],
+      tmlxOptions: [{
+        value: 1,
+        label: '判断题'
+      }, {
+        value: 2,
+        label: '单选题'
+      }, {
+        value: 3,
+        label: '多选题'
+      }, {
+        value: 4,
+        label: '填空题'
+      }, {
+        value: 5,
+        label: '应用题'
       }],
       list: [],
       tableInfo: {
