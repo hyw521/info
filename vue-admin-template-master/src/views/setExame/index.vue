@@ -89,26 +89,49 @@
       <div>
         <draggable
           class="list-group"
-          v-model="tableData"
+          v-model="listCard"
           :options="{ draggable: '.rows' }"
           :move="getdata"
           @update="datadragEnd"
         >
           <div
             class="rows"
-            v-for="(item, index) in tableData"
+            v-for="(item, index) in listCard"
             :key="index"
             style="display: flex"
           >
-            <div>
-              <div class="cell">{{ index + 1 }}</div>
-            </div>
-            <div>
-              <div class="cell">{{ item.name }}</div>
-            </div>
-            <div>
-              <div class="cell">{{ item.age }}</div>
-            </div>
+            <el-card class="box-card">
+              <div class="text item">
+                <div class="title">
+                  {{ item.lx | filterLX }}
+                </div>
+                <div class="one">
+                  <div>
+                    <span>{{ item.Id }}、</span>
+                    <span>{{ item.question }}</span>
+                  </div>
+                  <span>( )</span>
+                </div>
+                <div class="select-answer" v-if="[2, 3].includes(item.lx)">
+                  <div>
+                    <span>A.</span>
+                    <span>{{ item.A }}</span>
+                  </div>
+                  <div>
+                    <span>B.</span>
+                    <span>{{ item.B }}</span>
+                  </div>
+                  <div>
+                    <span>C.</span>
+                    <span>{{ item.C }}</span>
+                  </div>
+                  <div>
+                    <span>D.</span>
+                    <span>{{ item.D }}</span>
+                  </div>
+                </div>
+              </div>
+            </el-card>
           </div>
         </draggable>
       </div>
@@ -190,6 +213,21 @@ export default {
     draggable,
     Sortable
     // animationDialog
+  },
+  filters: {
+    filterLX(val) {
+      if (val === 1) {
+        return '判断题'
+      } else if (val === 2) {
+        return '单选题'
+      } else if (val === 3) {
+        return '多选题'
+      } else if (val === 4) {
+        return '填空题'
+      } else if (val === 5) {
+        return '应用题'
+      }
+    }
   },
   data() {
     return {
@@ -274,18 +312,65 @@ export default {
       selectionObj: {
         selection: []
       },
-      tableData: [
+      listCard: [
         {
-          question: '我是题目一', answer: '你是大笨猪'
+          question: '我是题目一', answer: '你是大笨猪', lx: 1, Id: 1
         },
         {
-          question: '我是题目二', answer: '你是大肥猪'
+          question: '我是题目二', answer: '你是大肥猪', lx: 2, Id: 2, A: 'ASDAS', B: 'ASDAS', C: 'ASDAS', D: 'ASDAS'
         },
         {
-          question: '我是题目三', answer: '你是大懒猪'
+          question: '我是题目三', answer: '你是大懒猪', lx: 3, Id: 3, A: 'ASDAS', B: 'ASDAS', C: 'ASDAS', D: 'ASDAS'
         },
         {
-          question: '我是题目四', answer: '你是大傻猪'
+          question: '我是题目四', answer: '你是大傻猪', lx: 4, Id: 4
+        },
+        {
+          question: '我是题目五', answer: '你是大傻猪', lx: 5, Id: 5
+        },
+        {
+          question: '我是题目一', answer: '你是大笨猪', lx: 1, Id: 1
+        },
+        {
+          question: '我是题目二', answer: '你是大肥猪', lx: 2, Id: 2, A: 'ASDAS', B: 'ASDAS', C: 'ASDAS', D: 'ASDAS'
+        },
+        {
+          question: '我是题目三', answer: '你是大懒猪', lx: 3, Id: 3, A: 'ASDAS', B: 'ASDAS', C: 'ASDAS', D: 'ASDAS'
+        },
+        {
+          question: '我是题目四', answer: '你是大傻猪', lx: 4, Id: 4
+        },
+        {
+          question: '我是题目五', answer: '你是大傻猪', lx: 5, Id: 5
+        }, {
+          question: '我是题目一', answer: '你是大笨猪', lx: 1, Id: 1
+        },
+        {
+          question: '我是题目二', answer: '你是大肥猪', lx: 2, Id: 2, A: 'ASDAS', B: 'ASDAS', C: 'ASDAS', D: 'ASDAS'
+        },
+        {
+          question: '我是题目三', answer: '你是大懒猪', lx: 3, Id: 3, A: 'ASDAS', B: 'ASDAS', C: 'ASDAS', D: 'ASDAS'
+        },
+        {
+          question: '我是题目四', answer: '你是大傻猪', lx: 4, Id: 4
+        },
+        {
+          question: '我是题目五', answer: '你是大傻猪', lx: 5, Id: 5
+        },
+        {
+          question: '我是题目一', answer: '你是大笨猪', lx: 1, Id: 1
+        },
+        {
+          question: '我是题目二', answer: '你是大肥猪', lx: 2, Id: 2, A: 'ASDAS', B: 'ASDAS', C: 'ASDAS', D: 'ASDAS'
+        },
+        {
+          question: '我是题目三', answer: '你是大懒猪', lx: 3, Id: 3, A: 'ASDAS', B: 'ASDAS', C: 'ASDAS', D: 'ASDAS'
+        },
+        {
+          question: '我是题目四', answer: '你是大傻猪', lx: 4, Id: 4
+        },
+        {
+          question: '我是题目五', answer: '你是大傻猪', lx: 5, Id: 5
         }
       ]
     };
@@ -385,6 +470,49 @@ export default {
       .el-dialog__body {
         flex: 1;
       }
+    }
+  }
+}
+
+.sort-exame-dialog {
+  ::v-deep {
+    .el-dialog {
+      margin-top: 5vh !important;
+      .el-dialog__body {
+        height: 560px;
+        overflow: auto;
+      }
+    }
+  }
+}
+.text {
+  font-size: 14px;
+}
+.item {
+  padding: 8px 0;
+  min-height: 132px;
+}
+.box-card {
+  width: 300px;
+}
+.list-group {
+  display: flex;
+  flex-wrap: wrap;
+  .rows {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    ::v-deep {
+      .el-card__body {
+        padding: 10px 20px 20px 20px;
+      }
+    }
+    .title {
+      margin-bottom: 10px;
+    }
+    .one {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
     }
   }
 }
